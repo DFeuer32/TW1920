@@ -1,4 +1,4 @@
-# :open_file_folder: Tecnologias Web - 2019/2020
+# :open_file_folder: Web Technologies - 2019/2020
 
 :cloud: Student support resource repository.
 
