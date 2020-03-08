@@ -1,0 +1,66 @@
+div p {
+    color: seagreen;
+}
+
+div>p {
+    color: violet;
+}
+
+div~p {
+    color: indigo;
+}
+
+div+p {
+    color: lawngreen;
+}
+
+div p:hover {
+    background-color: lightseagreen;
+}
+
+div.lista>p:nth-child(n) {
+    color: limegreen;
+    background-color: cornflowerblue;
+}
+
+div.lista>p:nth-child(2n) {
+    color: limegreen;
+    background-color: coral;
+}
+
+.box {
+    width: 50%;
+    height: 100px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.bigbox {
+    display: flex;
+}
+
+.box1 {
+    background-color: coral;
+}
+
+div.box2 {
+    background-color: cornflowerblue;
+}
+
+@media print {
+    * {
+        background-color: red;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    body {
+        background: greenyellow;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        background-color: deepskyblue;
+    }
+}
