@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Exemplo</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    var teste = 'O resultado final é:';
+
+    var valor = 123;
+
+    var array = [1, 2, 3]
+
+    var resultado = duplica(100);
+
+    var mensagem = teste + ' asdfkjasdf ' + resultado
+
+    var mensagem2 = `${teste} sehkjwegf ${resultado}`
+
+    var mensagem3 = valor + 100;
+
+    for (var item of array) {
+        console.log(duplica(item))
+    }
+
+    for (var index in array) {
+        console.log(duplica(array[index]))
+    }
+
+    function duplica(valor) {
+        var result = valor * 2;
+        return result;
+
+        //return valor * 2
+    }
+</script>
+
+</html>

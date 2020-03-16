@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>Teste</title>
+</head>
+<style>
+    body {
+        background-color: cadetblue;
+    }
+</style>
+
+<body onclick="changeColor('aaaa')" id="aaaa">
+    <h6>saaadd</h6>
+</body>
+<script>
+    function changeColor(id) {
+        document.getElementById(id).innerHTML = getRandomColor()
+        document.getElementById(id).style.backgroundColor = getRandomColor();
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+
+</html>
