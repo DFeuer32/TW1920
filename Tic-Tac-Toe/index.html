@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            font-family: monospace;
+            color: bisque;
+        }
+        
+        body {
+            background-color: burlywood;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        td {
+            background-color: white;
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            font-size: 60px;
+        }
+        
+        h3 {
+            font-size: 30px;
+        }
+        
+        #result {
+            font-size: 20px;
+            display: grid;
+        }
+        
+        #result span:first-child {
+            color: orangered;
+        }
+        
+        #result span {
+            color: steelblue;
+        }
+        
+        #result,
+        #msg {
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>TIC-TAC-TOE</h1>
+        <h3 id="msg">Player 1 turn!</h3>
+        <table cellspacing="5">
+            <tr>
+                <td id="0" onclick="Play(this.id)"></td>
+                <td id="1" onclick="Play(this.id)"></td>
+                <td id="2" onclick="Play(this.id)"></td>
+            </tr>
+            <tr>
+                <td id="3" onclick="Play(this.id)"></td>
+                <td id="4" onclick="Play(this.id)"></td>
+                <td id="5" onclick="Play(this.id)"></td>
+            </tr>
+            <tr>
+                <td id="6" onclick="Play(this.id)"></td>
+                <td id="7" onclick="Play(this.id)"></td>
+                <td id="8" onclick="Play(this.id)"></td>
+            </tr>
+        </table>
+
+        <div id="result"></div>
+    </div>
+</body>
+<script>
+    // -- Gloval variables
+    var Player1 = (Player2 = 0);
+    var Player = 1;
+    var Cells = [];
+
+    var Combinations = [
+        [6, 7, 8],
+        [0, 1, 2],
+        [3, 4, 5],
+        [0, 3, 6],
+        [2, 4, 6],
+        [0, 4, 8],
+        [2, 5, 8],
+        [1, 4, 7]
+    ];
+
+    // -- Call Init function on page load
+    Init();
+
+
+    // -- Start or reset game
+    function Init() {
+        Cells = [];
+
+        // -- Update result message
+        document.getElementById(
+            "result"
+        ).innerHTML = `<span>Player 1 - ${Player1}</span> <span>Player 2 - ${Player2}</span>`;
+
+
+        // -- WhoIsNext call
+        WhoIsNext();
+
+
+        // -- Set white background to all squares
+        for (var i = 0; i < 9; i++) {
+            document.getElementById(i).style.backgroundColor = "white";
+        }
+    }
+
+
+    // -- Play function - is called every square click
+    function Play(id) {
+
+        // -- If square is already colored stop
+        if (Cells[id] == null) {
+
+            // -- Change clicked square color
+            document.getElementById(id).style.backgroundColor =
+                Player == 1 ? "orangered" : "steelblue";
+
+            // -- Update movs
+            Cells[id] = Player;
+
+            // -- Invert player 
+            Player = Player * -1;
+
+
+            // -- WhoIsNext call
+            WhoIsNext();
+
+
+            // -- CheckForWinner call
+            CheckForWinner();
+        }
+    }
+
+    // -- Update turn message
+    function WhoIsNext() {
+        document.getElementById("msg").innerText =
+            Player == 1 ? "Player 1 turn!" : "Player 2 turn!";
+    }
+
+
+    // -- Checks if there is a winner 
+    function CheckForWinner() {
+        // -- Winner call
+        var winner = Winner();
+
+        // -- If no winner
+        if (winner == null) return;
+
+        document.getElementById("msg").innerText =
+            winner == 1 ? "Player 1 wins!" : "Player 2 wins!";
+
+        // -- Update players stats 
+        if (winner == 1) Player1 = Player1 + 1;
+        else Player2 = Player2 + 1;
+
+        // -- Wait 500ms and restart game
+        setTimeout(() => {
+            Init();
+        }, 500);
+    }
+
+    // - Winner function - check if and who has one of the 8 possible combinations
+    function Winner() {
+        var Win = null;
+        Combinations.forEach(item => {
+            if (
+                Cells[item[0]] &&
+                Cells[item[0]] === Cells[item[1]] &&
+                Cells[item[0]] === Cells[item[2]]
+            )
+                Win = Cells[item[0]];
+        });
+        return Win;
+    }
+</script>
+
+</html>
