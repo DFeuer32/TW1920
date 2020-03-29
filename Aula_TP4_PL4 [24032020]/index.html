@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euromilhões</title>
+</head>
+
+<body>
+    <h1>Euromilhões</h1>
+
+    <div>
+        <button id="gera">Gera chave</button>
+        <button id="limpa">Limpa chaves</button>
+    </div>
+
+    <div id="listas">
+
+    </div>
+</body>
+
+<script>
+    var gera = document.getElementById('gera');
+    var limpa = document.getElementById('limpa');
+    var conteudo = document.getElementById('listas');
+
+    limpa.onclick = function() {
+        conteudo.innerHTML = ''
+    }
+
+    gera.addEventListener('click', geraChave)
+
+    function geraChave() {
+
+        var chave = {
+            estrelas: [],
+            numeros: []
+        }
+
+        chave.estrelas = extrator(1, 12, 2);
+        chave.numeros = extrator(1, 50, 5)
+
+
+        var divChave = document.createElement('div');
+        divChave.className = "chave";
+
+        var listaEstrelas = document.createElement("ul");
+        listaEstrelas.className = 'estrelas';
+
+        var listaNumeros = document.createElement("ul");
+        listaNumeros.className = 'numeros';
+
+        divChave.append(listaEstrelas);
+        divChave.append(listaNumeros);
+
+        array2list(listaNumeros, chave.numeros)
+        array2list(listaEstrelas, chave.estrelas)
+
+        conteudo.appendChild(divChave)
+
+        function array2list(lista, chave) {
+            for (var c of chave) {
+                // <li>1</li>
+                var li = document.createElement('li');
+                li.innerHTML = c
+                lista.appendChild(li)
+            }
+        }
+
+        function extrator(min, max, n) {
+            var extracao = []
+
+            while (extracao.length < n) {
+                numero = Math.floor(Math.random() * (max - min + 1)) + min
+
+                if (extracao.indexOf(numero) < 0) {
+                    extracao.push(numero)
+                }
+            }
+
+            return extracao.sort((a, b) => {
+                return Number(a) - Number(b)
+            })
+        }
+
+    }
+</script>
+
+</html>
